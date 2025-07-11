@@ -21,7 +21,6 @@ function ChatPanel(props) {
         data: doc.data(),
         id: doc.id
       }));
-      console.log(arrayOfUsers);
       setUser(arrayOfUsers);
       setFilterArray(arrayOfUsers);
       setIsLoading(false);

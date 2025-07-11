@@ -6,7 +6,6 @@ import image from './defaultimage.jpg';
 function UserCard({ user, id, darkMode }) {
   const { userData } = useAuth();
   const isCurrentUser = userData.id === id;
-  console.log(user.photoURL);
   
 
   return (

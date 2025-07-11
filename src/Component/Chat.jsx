@@ -2,7 +2,7 @@ import React, { useEffect, useState,useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import { MessageSquareText, PlusIcon, SendIcon, Trash2 } from 'lucide-react'
 import { arrayUnion, doc, getDoc, onSnapshot, setDoc, updateDoc } from 'firebase/firestore';
-import { DB } from '../../firebase'
+import { DB } from "../../firebase";
 import { useAuth } from './AuthContext';
 
 function Chat({darkMode}) {
