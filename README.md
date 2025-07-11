@@ -25,3 +25,6 @@ VITE_FIREBASE_API_KEY=your_key
 VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
 VITE_FIREBASE_PROJECT_ID=your_project_id
 4.  Start the app: npm run dev
+
+## Deploy Link
+https://talkify-5af79.web.app
