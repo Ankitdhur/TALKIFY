@@ -20,19 +20,19 @@ RUN npm run build
 # --- Production Stage ---
 FROM nginx:alpine
 
-# Copy the build output from the builder stage
+# Copy built assets from builder stage
 COPY --from=builder /app/dist /usr/share/nginx/html
 
 # Copy nginx configuration (if needed, otherwise use default)
 # COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Expose port 80
+# Expose port
 EXPOSE 80
 
-# Set environment variables (example)
+# Set environment variables (if needed)
 ENV NODE_ENV production
 
-# Health check (example)
+# Health check (optional)
 HEALTHCHECK --interval=5m --timeout=3s \
   CMD curl -f http://localhost/ || exit 1
 
