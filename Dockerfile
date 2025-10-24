@@ -1,4 +1,4 @@
-# Use multi-stage builds to optimize image size
+# Use multi-stage builds
 FROM node:20-alpine AS builder
 
 # Set working directory
@@ -7,9 +7,8 @@ WORKDIR /app
 # Copy package.json and package-lock.json (or yarn.lock/pnpm-lock.yaml)
 COPY package.json ./
 
-# Install dependencies based on environment
-ARG NODE_ENV=development
-RUN if [ "$NODE_ENV" = "production" ]; then npm ci --only=production; else npm install; fi
+# Install dependencies
+RUN npm install
 
 # Copy source files
 COPY . .
@@ -20,7 +19,7 @@ RUN npm run build
 # --- Production Stage ---
 FROM nginx:alpine
 
-# Copy built assets from builder stage
+# Copy build output from builder stage
 COPY --from=builder /app/dist /usr/share/nginx/html
 
 # Copy nginx configuration (if needed, otherwise use default)
@@ -28,13 +27,6 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 
 # Expose port
 EXPOSE 80
-
-# Set environment variables (if needed)
-ENV NODE_ENV production
-
-# Health check (optional)
-HEALTHCHECK --interval=5m --timeout=3s \
-  CMD curl -f http://localhost/ || exit 1
 
 # Start nginx
 CMD ["nginx", "-g", "daemon off;"]
