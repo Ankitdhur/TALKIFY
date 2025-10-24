@@ -29,8 +29,12 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 # Expose port 80
 EXPOSE 80
 
-# Set environment variables (if needed)
+# Set environment variables (example)
 ENV NODE_ENV production
+
+# Health check (example)
+HEALTHCHECK --interval=5m --timeout=3s \
+  CMD curl -f http://localhost/ || exit 1
 
 # Start nginx
 CMD ["nginx", "-g", "daemon off;"]
